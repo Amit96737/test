@@ -1,27 +1,41 @@
 # Deploy FastAPI on Render
 
-Use this repo as a template to deploy a Python [FastAPI](https://fastapi.tiangolo.com) service on Render.
+This project demonstrates how to deploy a FastAPI application on Render.
 
-See https://render.com/docs/deploy-fastapi or follow the steps below:
+## Overview
 
-## Manual Steps
+I have created a test FastAPI API and successfully deployed it on Render. Along with the application, I have also set up a PostgreSQL database using Render’s built-in database service.
 
-1. You may use this repository directly or [create your own repository from this template](https://github.com/render-examples/fastapi/generate) if you'd like to customize the code.
-2. Create a new Web Service on Render.
-3. Specify the URL to your new repository or this repository.
-4. Render will automatically detect that you are deploying a Python service and use `pip` to download the dependencies.
-5. Specify the following as the Start Command.
+The setup is working successfully, and the deployed application is accessible via a public URL:
 
-    ```shell
-    uvicorn main:app --host 0.0.0.0 --port $PORT
-    ```
+https://test-2-1jtk.onrender.com
 
-6. Click Create Web Service.
+## Local Development
 
-Or simply click:
+To run the project locally, I use the following command:
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/render-examples/fastapi)
+uvicorn main:app --host 0.0.0.0 --port 9001
 
-## Thanks
+## Database & Migrations
 
-Thanks to [Harish](https://harishgarg.com) for the [inspiration to create a FastAPI quickstart for Render](https://twitter.com/harishkgarg/status/1435084018677010434) and for some sample code!
+* PostgreSQL database is configured using Render
+* Alembic is used for database migrations
+* A test table (`users`) has been created using Alembic
+
+## Deployment Steps
+
+You can deploy this project on Render by following these steps:
+
+1. Create a new Web Service on Render
+2. Connect your GitHub repository
+3. Render will automatically detect it as a Python project
+4. Use the following Start Command:
+
+uvicorn main:app --host 0.0.0.0 --port $PORT
+
+5. Click on **Create Web Service**
+
+## Notes
+
+* Render allows managing both application and database in one place
+* This simplifies deployment and reduces external dependencies
