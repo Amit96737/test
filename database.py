@@ -14,11 +14,6 @@ if not SQLALCHEMY_DATABASE_URL:
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
-    pool_pre_ping=True,  # Ensure stale connections aren't used
-    pool_recycle=1800,  # Recycle every 30 mins to avoid idle disconnects
-    pool_size=10,  # Number of connections in the pool
-    max_overflow=20,  # Extra connections allowed (burst traffic)
-    pool_timeout=30,
     connect_args={"sslmode": "require"}
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

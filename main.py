@@ -1,15 +1,18 @@
 from typing import Optional
 
-from fastapi import FastAPI
-
+from fastapi import FastAPI, Request
 from auth import main as auth_main
+from starlette.templating import Jinja2Templates
 
 app = FastAPI()
 
-
+templates = Jinja2Templates(directory="templates")
 @app.get("/")
-async def root():
-    return {"message": "Hello World"}
+def root(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html"
+    )
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
